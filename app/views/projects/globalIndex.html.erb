@@ -1,0 +1,27 @@
+<h1>Listing projects</h1>
+
+<table>
+  <tr>
+    <th>Size</th>
+    <th>Endingdate</th>
+    <th>User</th>
+    <th>Description</th>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @projects.each do |project| %>
+  <tr>
+    <td><%= project.size %></td>
+    <td><%= project.endingDate %></td>
+    <td><%= project.user %></td>
+    <td><%= project.description %></td>
+    <td><%= project.title %></td>
+    <td><%= link_to 'Show', [project.user,project] %></td>
+    <td><% if (user_owns_project? project )%><%= link_to 'Edit', edit_project_path(project) %><%end%></td>
+    <td><% if (user_owns_project? project )%><%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %><%end%></td>
+  </tr>
+<% end %>
+</table>

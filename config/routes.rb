@@ -1,4 +1,19 @@
 P52::Application.routes.draw do
+
+  match '/projects' => 'projects#globalIndex'
+  resources :projects, :except =>[:show,:index] 
+  
+
+  resources :authentications
+
+  devise_for :users
+  root :to => "home#index"
+  resources :users, :only => :show do
+    resources :projects, :only =>[:show,:index]
+  end
+  match '/users/:id/recent_tweets' => 'users#recent_tweets'
+  match '/users/:id/last_pictures' => 'users#last_pictures'
+  match '/auth/:provider/callback' => 'authentications#create'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +63,6 @@ P52::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
 
   # See how all your routes lay out with "rake routes"
 

@@ -1,10 +1,29 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+# If you are deploying to Heroku and MongoHQ,
+# you supply connection information here.
+require 'uri'
+if ENV['MONGOHQ_URL']
+  mongo_uri = URI.parse(ENV['MONGOHQ_URL'])
+  ENV['MONGOID_HOST'] = mongo_uri.host
+  ENV['MONGOID_PORT'] = mongo_uri.port.to_s
+  ENV['MONGOID_USERNAME'] = mongo_uri.user
+  ENV['MONGOID_PASSWORD'] = mongo_uri.password
+  ENV['MONGOID_DATABASE'] = mongo_uri.path.gsub('/', '')
+end
+
+require 'mongoid/railtie'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'active_resource/railtie'
+require 'rails/test_unit/railtie'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
+
+require 'rails/all'
+
 
 module P52
   class Application < Rails::Application
@@ -29,10 +48,22 @@ module P52
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-
+    
+    
+    # A dummy setup for development - no deliveries, but logged
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.perform_deliveries = false
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.default :charset => "utf-8"
+    
+    config.filter_parameters += [:password, :password_confirmation]
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
-
+    config.generators do |g|
+      g.orm             :mongoid
+    end
+    
+    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

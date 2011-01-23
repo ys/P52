@@ -7,8 +7,14 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-
-<%= yield %>
+	<ul class="hmenu">
+	  <%= render 'devise/menu/registration_items' %>
+	  <%= render 'devise/menu/login_items' %>
+	  <%if user_signed_in?%><%= link_to 'New Project', new_project_path %><%end%>
+	</ul>
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+	<%= yield %>
 
 </body>
 </html>
