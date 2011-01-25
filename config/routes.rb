@@ -1,5 +1,7 @@
 P52::Application.routes.draw do
 
+  resources :pictures
+
   match '/projects' => 'projects#globalIndex'
   resources :projects, :except =>[:show,:index] 
   
@@ -13,6 +15,7 @@ P52::Application.routes.draw do
   end
   match '/users/:id/recent_tweets' => 'users#recent_tweets'
   match '/users/:id/last_pictures' => 'users#last_pictures'
+  match '/users/:id/galleries' => 'users#galleries'
   match '/auth/:provider/callback' => 'authentications#create'
   # The priority is based upon order of creation:
   # first created -> highest priority.

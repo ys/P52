@@ -14,12 +14,7 @@ class ProjectsController < ApplicationController
       end
     end
   end
-  def preload_user
-    @user = User.find(:first,:conditions =>{:name=>params[:user_id]})
-  end
-  def current_user_load
-    @user = current_user
-  end
+  
   def preload_project
     @project = Project.find(:first, :conditions =>{:user_id => @user.id, :title =>params[:id]})
   end

@@ -1,9 +1,17 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :except =>[:show]
   before_filter :preload_user
-  def preload_user
-    @user = User.find(:first,:conditions =>{:name=>params[:id]})
+  
+  before_filter :load_flickraw, :only=>[:last_pictures, :galleries]
+  
+  def load_flickraw
+    FlickRaw.api_key='52c9226e6d1e5c2452366c0f26e5ee11'
+    FlickRaw.shared_secret='7248d7d35fd2b1d5'
+    auth = @user.authentications.find(:first, :conditions => { :provider => 'flickr' })
+    @auth1 = flickr.auth.checkToken :auth_token => auth['token']
   end
+  
+ 
   
   def show
     
@@ -33,15 +41,20 @@ class UsersController < ApplicationController
   end
   
   def last_pictures
-    FlickRaw.api_key='52c9226e6d1e5c2452366c0f26e5ee11'
-    FlickRaw.shared_secret='7248d7d35fd2b1d5'
-    auth = @user.authentications.find(:first, :conditions => { :provider => 'flickr' })
-    auth1 = flickr.auth.checkToken :auth_token => auth['token']
     @urls = []
-    flickr.photos.getRecent(:id=>auth1['id']).each do |photo|
-      info = flickr.photos.getInfo(:photo_id => photo.id)
-      @urls << FlickRaw.url_b(info)
+    flickr.photos.search(:user_id => 'me').each do |photo|
+      puts photo.to_jso
+      @urls << FlickRaw.url_s(photo)
     end
   end
+  def galleries
+    @urls = []
+    flickr.photosets.getList.each do |photoset|
+      @urls << photoset.to_json
+    end
+    puts @urls
+    
+  end
+  
 
 end

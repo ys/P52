@@ -25,6 +25,9 @@
   <%= @project.title %>
 </p>
 
+<% @project.pictures.each do |picture|%>
+	<%= image_tag picture.url_s%>
+<%end%>
 <% if (user_owns_project? @project )%>
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%end%>

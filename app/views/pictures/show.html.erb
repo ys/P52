@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+<%=image_tag @picture.url_s%>
+<%=image_tag @picture.url_m%>
+<%=image_tag @picture.url_t%>
+<%=image_tag @picture.url_b%>
+<%=image_tag @picture.url_z%>
+<%=image_tag @picture.url%>
+<p>
+  <b>Pictureid:</b>
+  <%= @picture.pictureId %>
+</p>
+
+<p>
+  <b>Postdate:</b>
+  <%= @picture.postDate %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%= @picture.project %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @picture.description %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @picture.title %>
+</p>
+
+
+<%= link_to 'Edit', edit_picture_path(@picture) %> |
+<%= link_to 'Back', pictures_path %>
