@@ -2,7 +2,7 @@
 <% @projects.each do |project| %>
 	<article class="index_project">
   	<%= link_to image_tag(project.url_s), [project.user,project] %>
-	<header><%= project.size %> - <%= project.title %></header>
+	<header><a href='<%= user_project_path(project.user,project)%>'><%= project.size %> - <%= project.title %></a></header>
 	<span class="index_project_buttons">
    	<%= link_to 'Edit', edit_project_path(project) if (user_owns? project ) %>
     <%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete if (user_owns? project )%>

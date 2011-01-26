@@ -54,4 +54,15 @@ class User
       true
     end
   end
+  
+  def avatar_url
+    if Avatar::source.avatar_url_for(self, :size => 75)
+      Avatar::source.avatar_url_for(self, :size => 75)
+    elsif avatar.url
+      avatar.url(:square)
+    else
+      'blank.gif'
+    end
+  end
+  
 end

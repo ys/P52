@@ -19,6 +19,7 @@ gem 'rest-client'
 gem 'multi_json'
 gem 'oa-more', :git => 'https://github.com/pchilton/omniauth.git'
 gem 'flickraw'
+gem 'avatar'
 
 # uncomment the next line if you wish to deploy to Heroku
  gem 'heroku'
