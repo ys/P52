@@ -1,8 +1,17 @@
-<h1>Users#show</h1>
+
 <%= image_tag @user.avatar.url(:square) %>
 <p>User: <%= @user.name %></p>
-<%= image_tag @user.avatar.url(:small) %>
-<%= image_tag @user.avatar.url(:medium) %>
-<%= image_tag @user.avatar.url(:large) %>
-<%= image_tag @user.avatar.url(:original) %>
+
+<h2>Projects</h2>
+<% @user.projects.each do |project| %>
+
+<%= link_to project.title, [@user, project]%>
+<%end%>
+
+<h2>Images from all projects</h2>
+<% @user.pictures.each do |picture| %>
+
+<%= link_to image_tag(picture.url_s), picture%>
+<%end%>
+
 

@@ -1,18 +1,25 @@
 P52::Application.routes.draw do
 
-  resources :pictures
-
-  match '/projects' => 'projects#globalIndex'
-  resources :projects, :except =>[:show,:index] 
   
-
+  
+  resources :projects, :except =>[:show,:index] do
+    member do
+        put 'archive'
+      end
+    resources :pictures, :only =>[:new]
+  end 
+  resources :pictures, :except =>[:index]
+  match '/pictures' => 'pictures#globalIndex'
+  match '/projects' => 'projects#globalIndex'
   resources :authentications
 
   devise_for :users
   root :to => "home#index"
-  resources :users, :only => :show do
+  resources :users, :only => [:show, :index] do
     resources :projects, :only =>[:show,:index]
+    resources :pictures, :only =>[:index, :show]
   end
+  match '/users/:id/:size' => 'users#current_project'
   match '/users/:id/recent_tweets' => 'users#recent_tweets'
   match '/users/:id/last_pictures' => 'users#last_pictures'
   match '/users/:id/galleries' => 'users#galleries'

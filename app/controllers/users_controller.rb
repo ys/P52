@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except =>[:show]
+  before_filter :authenticate_user!, :except =>[:show, :index]
   before_filter :preload_user
   
   before_filter :load_flickraw, :only=>[:last_pictures, :galleries]
@@ -12,6 +12,9 @@ class UsersController < ApplicationController
   end
   
  
+  def index
+    @users = User.all
+  end
   
   def show
     
@@ -47,6 +50,7 @@ class UsersController < ApplicationController
       @urls << FlickRaw.url_s(photo)
     end
   end
+  
   def galleries
     @urls = []
     flickr.photosets.getList.each do |photoset|
@@ -54,6 +58,11 @@ class UsersController < ApplicationController
     end
     puts @urls
     
+  end
+  
+  def current_project
+    @project = @user.current params[:size]
+    render 'projects/show'
   end
   
 

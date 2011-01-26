@@ -11,23 +11,8 @@
     </div>
   <% end %>
   <div class="field">
-    
-	<% if @project%>
-		<%= f.hidden_field :project_id%>
-	<%else%>
-		<%= f.label :project %><br />
-		<%= f.collection_select(:project_id, @projects, :id, :title) %>
-	<%end%>
-  </div>
-  <div class="field">
-	<% @pictures.each do |pic| %>
-		<label>
-			<%= radio_button_tag "picture[flickr]" , pic.id,(@picture.flickr && (@picture.flickr['id'] == pic.id))%>
-			<%= image_tag FlickRaw.url_s pic %>
-			</label>
-
-	<% end %>
-	
+		<%= f.label :title %><br />
+		<%= f.text_field(:title) %>
   </div>
   <div class="actions">
     <%= f.submit %>

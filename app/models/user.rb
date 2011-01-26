@@ -4,7 +4,7 @@ class User
   
   field :name
   embeds_many :authentications
-  references_many :projects
+  references_many :projects, :dependent => :delete
   has_attached_file :avatar,
       :url => "/images/avatars/:id/:style.:extension" ,
       :path           => 'public/images/avatars/:id/:style.:extension',
@@ -29,4 +29,29 @@ class User
     name
   end
   
+  def pictures
+    projects = Project.where(:user_id => id).map(&:_id)
+    Picture.where(:project_id.in => projects)
+  end
+  
+  def can_have_project? size
+    project= Project.find(:first, :conditions =>{:user_id => id, :size => size, :current => true})
+    if project == nil
+      true
+    else
+      false
+    end
+  end
+  def current size
+    Project.find(:first, :conditions =>{:user_id => id, :size => size, :current => true})
+  end
+  
+  def authenticated_to_flickr?
+    auth = authentications.find(:first, :conditions => { :provider => 'flickr' })
+    if auth == nil
+      false
+    else
+      true
+    end
+  end
 end

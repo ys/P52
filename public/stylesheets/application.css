@@ -1,10 +1,15 @@
-ul.hmenu {
+body{
+	margin:0;
+	padding:0;
+}
+
+nav.hmenu {
   list-style: none;	
   margin: 0 0 2em;
   padding: 0;
 }
 
-ul.hmenu li {
+nav.hmenu li {
   display: inline;  
 }
 
@@ -73,4 +78,66 @@ p.alert {
   margin-right: 20px;
   text-align: center;
   margin-bottom: 10px;
+}
+
+input[type="radio"]{
+	display:none;
+}
+
+input[type="radio"]:checked + img{
+	border:solid 3px grey;
+	margin:-3px;
+}
+
+.hmenu {
+	float:right;
+}
+
+#title{
+	font-size:20px;
+}
+header.main{
+	margin:0;
+	padding:20px;
+	background:grey;
+	color:white;
+	border-bottom:solid black 1px;
+}
+header.main a {
+	color:white;
+	text-decoration:none;
+}
+header.main a:visited {
+	color:white;
+	text-decoration:none;
+}
+.index_picture_buttons, .show_picture_buttons, .index_project_buttons, .show_project_buttons{
+	display:none;
+}
+article[class^="index"]{
+	width:75px;
+	float:left;
+	position:relative;
+}
+
+article[class^="index"] img{
+	width:75px;
+}
+
+article[class^="index"] header{
+	background-color:grey;
+	width:75px;
+	height:75px;
+	display:none;
+	
+}
+article[class^="index"]:hover header{
+	display:block;
+	position:absolute;
+	color:white;
+	top:0;
+}
+header.main a.alert {
+  color: red;
+text-decoration:underline;
 }

@@ -1,12 +1,15 @@
 class Picture
   include Mongoid::Document
   include Mongoid::Paperclip
+  
+  
   field :pictureId, :type => Integer
   field :postDate, :type => Date
   field :description, :type => String
   field :title, :type => String
   referenced_in :project, :inverse_of => :pictures
   field :flickr, :type => Hash
+
   has_attached_file :image,
     :url => "/images/user/:project.user.name/projects/:project_name/:id/:style.:extension" ,
     :path           => 'public/images/avatars/:id/:style.:extension',
@@ -18,7 +21,10 @@ class Picture
     :large    => ['500x500>',   :jpg]
   }
 
-
+  def user
+    project.user
+  end
+  
  
   PHOTO_SOURCE_URL='http://farm%s.static.flickr.com/%s/%s_%s%s.%s'.freeze
  

@@ -1,31 +1,9 @@
-<h1>Listing pictures</h1>
-
-<table>
-  <tr>
-    <th>Pictureid</th>
-    <th>Postdate</th>
-    <th>Project</th>
-    <th>Description</th>
-    <th>Title</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <% @pictures.each do |picture| %>
-  <tr>
-    <td><%= picture.pictureId %></td>
-    <td><%= picture.postDate %></td>
-    <td><%= picture.project %></td>
-    <td><%= picture.description %></td>
-    <td><%= picture.title %></td>
-    <td><%= link_to 'Show', picture %></td>
-    <td><%= link_to 'Edit', edit_picture_path(picture) %></td>
-    <td><%= link_to 'Destroy', picture, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+	<article class="index_picture">
+	<%=link_to image_tag(picture.url_s) , picture%>
+    <span class="index_picture_buttons"<%= link_to 'Edit', edit_picture_path(picture) if user_owns? picture%>
+    <%= link_to 'Destroy', picture, :confirm => 'Are you sure?', :method => :delete if user_owns? picture %></span>
+	</article>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Picture', new_picture_path %>

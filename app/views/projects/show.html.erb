@@ -1,34 +1,29 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <b>Size:</b>
-  <%= @project.size %>
-</p>
+<article class="show_project">
+<header class="show_project_header">
+  <%= @project.title %> - 
+  <% if !@project.description.empty? %><%= @project.description %> - <%end%>
 
-<p>
-  <b>Endingdate:</b>
-  <%= @project.endingDate %>
-</p>
+  <%= @project.numberOfPictures %> / <%= @project.size %> - By <%=link_to @project.user.name, @project.user%>
 
-<p>
-  <b>User:</b>
-  <%= @project.user %>
-</p>
+  <span class="archive_project"><% if @project.closed %> ARCHIVED<%end%></span>
+</header>
 
-<p>
-  <b>Description:</b>
-  <%= @project.description %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @project.title %>
-</p>
-
+<div class="show_project_pictures">
 <% @project.pictures.each do |picture|%>
-	<%= image_tag picture.url_s%>
+	<div class="show_project_picture">
+	<%= image_tag picture.url_z%><br/>
+	<span class="show_project_picture_infos">
+	<%= picture.title %>
+	</span>
+	</div>
 <%end%>
+</div>
+</article>
+<span class="show_project_buttons">
 <% if (user_owns_project? @project )%>
 <%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Add Picture', new_project_picture_path(@project )%> |
 <%end%>
-<%= link_to 'Back', user_projects_path %>
+<%= link_to 'Back', user_projects_path(@user) %>
+</span>

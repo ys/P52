@@ -1,35 +1,9 @@
-<p id="notice"><%= notice %></p>
-<%=image_tag @picture.url_s%>
-<%=image_tag @picture.url_m%>
-<%=image_tag @picture.url_t%>
-<%=image_tag @picture.url_b%>
-<%=image_tag @picture.url_z%>
-<%=image_tag @picture.url%>
-<p>
-  <b>Pictureid:</b>
-  <%= @picture.pictureId %>
-</p>
-
-<p>
-  <b>Postdate:</b>
-  <%= @picture.postDate %>
-</p>
-
-<p>
-  <b>Project:</b>
-  <%= @picture.project %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @picture.description %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @picture.title %>
-</p>
-
-
-<%= link_to 'Edit', edit_picture_path(@picture) %> |
+<article class="show_picture">
+<%=image_tag @picture.url%><br/>
+<span class="picture_title"><%= @picture.title if (@picture.title && !@picture.title.empty?)%> <%= 'This picture is' if (!@picture.title || @picture.title.empty?)%> in <%= link_to @picture.project.title, [@picture.user,@picture.project] %></span><br/>
+<span class="picture_user">By <%= @picture.user.name%></span><br/>
+  </article>
+<span class="show_picture_buttons">
+<% if user_owns? @picture %><%= link_to 'Edit', edit_picture_path(@picture) %> |<%end%>
 <%= link_to 'Back', pictures_path %>
+</span>

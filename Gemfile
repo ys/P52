@@ -14,10 +14,10 @@ gem 'devise'
 gem 'cancan'
 gem 'paperclip'
 gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
-gem 'omniauth', '0.2.0.beta2'
+gem 'omniauth', '0.2.0.beta1'
 gem 'rest-client'
 gem 'multi_json'
-gem 'oa-more', '0.2.0.beta2'
+gem 'oa-more', :git => 'https://github.com/pchilton/omniauth.git'
 gem 'flickraw'
 
 # uncomment the next line if you wish to deploy to Heroku

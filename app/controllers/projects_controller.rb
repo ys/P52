@@ -1,11 +1,11 @@
 class ProjectsController < ApplicationController
-  
+
   before_filter :authenticate_user! ,:except =>[:show, :index, :globalIndex]
   before_filter :preload_user , :only =>[:show, :index]
-  before_filter :current_user_load, :only =>[:edit,:create, :update, :destroy]
-  before_filter :preload_project, :only => [:show, :edit, :update, :destroy]
+  before_filter :current_user_load, :only =>[:archive,:edit,:create, :update, :destroy]
+  before_filter :preload_project, :only => [:archive,:show, :edit, :update, :destroy]
   before_filter :user_owns_project! ,:only => [:edit, :update, :destroy]
-  
+
   def user_owns_project!
     if authenticate_user!
       unless current_user == @project.user
@@ -14,20 +14,17 @@ class ProjectsController < ApplicationController
       end
     end
   end
-  
+
   def preload_project
     @project = Project.find(:first, :conditions =>{:user_id => @user.id, :title =>params[:id]})
   end
-  
-  
+
+
   def globalIndex
     @projects = Project.all
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @projects }
-    end
+    render "index"
   end
-  
+
   # GET /projects
   # GET /projects.xml
   def index
@@ -60,35 +57,59 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    
+
   end
 
   # POST /projects
   # POST /projects.xml
   def create
     @project = Project.new(params[:project])
+    @project.size = params[:project][:size]
     @project.user = current_user
+    @project.endingDate = Time.now + @project.size.days if @project.size
+    @project.current = true
+    @project.closed = false
+
     respond_to do |format|
-      if @project.save
-        format.html { redirect_to(@project, :notice => 'Project was successfully created.') }
-        format.xml  { render :xml => @project, :status => :created, :location => @project }
+      if !current_user.can_have_project? @project.size
+        format.html { redirect_to(user_projects_url(current_user), :notice => 'YOU ALREADY HAVE THAT KIND OF PROJECT') }
+        format.xml  { head :forbidden}
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
+        if @project.save
+          format.html { redirect_to([@project.user, @project], :notice => 'Project was successfully created.') }
+          format.xml  { render :xml => @project, :status => :created, :location => @project }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
+        end
       end
+
     end
   end
 
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
-
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to(@project, :notice => 'Project was successfully updated.') }
+        format.html { redirect_to([@project.user, @project], :notice => 'Project was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
+        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
+  def archive
+    @project.closed = true
+    @project.current = false
+    respond_to do |format|
+      if @project.save
+        format.html { redirect_to([@project.user, @project], :notice => 'Project was successfully archived.') }
+        format.xml  { head :ok }
+      else
+        format.html { redirect_to([@project.user, @project], :alert => 'Project was not archived.') }
         format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
       end
     end

@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>P52</title>
+  <title>fifty two</title>
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-	<ul class="hmenu">
-	  <%= render 'devise/menu/registration_items' %>
-	  <%= render 'devise/menu/login_items' %>
-	  <%if user_signed_in?%><%= link_to 'New Project', new_project_path %><%end%>
-	</ul>
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+	<header class="main">
+		<span id="title">fifty two</span>
+		<nav class="hmenu">
+		  <%= render 'devise/menu/registration_items' %>
+		  <%= render 'devise/menu/login_items' %>
+		  <%= render 'layouts/menu' %>
+		  <%= render 'layouts/menu_auth' %>
+		</nav>
+		<span class="alerts"><p class="notice"><%= notice %></p>
+		<p class="alert"><%= alert %></p></span>
+	</header>
+	
 	<%= yield %>
 
 </body>

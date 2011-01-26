@@ -1,0 +1,9 @@
+<% if user_signed_in? && current_user.authenticated_to_flickr? %>
+  <li>
+  <%= link_to('Authentications', authentications_path) %>
+  </li>
+<% else %>
+  <li>
+  <%= link_to('Authenticate to Flickr!', authentications_path, :class=> 'alert') %>
+  </li>
+<% end %>
