@@ -48,13 +48,11 @@ module P52
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    
+
     
     # A dummy setup for development - no deliveries, but logged
     config.action_mailer.delivery_method = :smtp
-    config.action_mailer.perform_deliveries = false
     config.action_mailer.raise_delivery_errors = true
-    config.action_mailer.default :charset => "utf-8"
     
     config.filter_parameters += [:password, :password_confirmation]
     # JavaScript files you want as :defaults (application.js is always included).
