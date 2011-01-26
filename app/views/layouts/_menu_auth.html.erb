@@ -2,7 +2,7 @@
   <li>
   <%= link_to('Authentications', authentications_path) %>
   </li>
-<% else %>
+<% elsif user_signed_in? %>
   <li>
   <%= link_to('Authenticate to Flickr!', authentications_path, :class=> 'alert') %>
   </li>

@@ -1,6 +1,6 @@
 P52::Application.routes.draw do
 
-  
+  root :to => "home#index"
   
   resources :projects, :except =>[:show,:index] do
     member do
@@ -14,7 +14,7 @@ P52::Application.routes.draw do
   resources :authentications
 
   devise_for :users
-  root :to => "home#index"
+  
   resources :users, :only => [:show, :index] do
     resources :projects, :only =>[:show,:index]
     resources :pictures, :only =>[:index, :show]
