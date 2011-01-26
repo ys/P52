@@ -6,7 +6,6 @@ class PicturesController < ApplicationController
 
   before_filter :preload_picture!, :except=>[:globalIndex, :new,:index,:create]
   before_filter :load_flickraw, :only=>[:create, :new, :edit, :update]
-
   before_filter :preload_new_edit, :only=>[:new, :edit]
 
   def preload_new_edit
@@ -47,8 +46,6 @@ class PicturesController < ApplicationController
   # GET /pictures/1
   # GET /pictures/1.xml
   def show
-
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @picture }
