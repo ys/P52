@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   
  
   def index
-    @users = User.all
+    @users = User.asc(:name).all
   end
   
   def show

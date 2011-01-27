@@ -16,19 +16,19 @@ class ProjectsController < ApplicationController
   end
 
   def preload_project
-    @project = Project.find(:first, :conditions =>{:user_id => @user.id, :title =>params[:id]})
+    @project = Project.asc(:title).where(:user_id => @user.id, :title =>params[:id]).first
   end
 
 
   def globalIndex
-    @projects = Project.all
+    @projects = Project.asc(:title).all
     render "index"
   end
 
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.find(:conditions =>{:user_id => @user.id})
+    @projects = Project.asc(:title).find(:conditions =>{:user_id => @user.id})
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @projects }

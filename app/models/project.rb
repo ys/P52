@@ -43,6 +43,14 @@ class Project
      'blank.gif'
     end
   end
+  def url_m
+    picture = Picture.where(:project_id => id).desc(:postDate).first
+    if picture
+      picture.url_m
+    else
+     'blank.gif'
+    end
+  end
 
   def can_post_picture?
     (current && !closed && (size > pictures.size))

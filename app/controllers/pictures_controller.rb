@@ -7,6 +7,8 @@ class PicturesController < ApplicationController
   before_filter :preload_picture!, :except=>[:globalIndex, :new,:index,:create]
   before_filter :load_flickraw, :only=>[:create, :new, :edit, :update]
   before_filter :preload_new_edit, :only=>[:new, :edit]
+  before_filter :charge_image_from_params , :only => [:create]
+  #before_filter :verify_image! , :only=>[:create]
 
   def preload_new_edit
     #@pictures = flickr.photos.search(:user_id => 'me', :min_upload_date => (Time.now-1.day).to_i , :max_upload_date => Time.now.to_i )
@@ -27,9 +29,24 @@ class PicturesController < ApplicationController
     auth = @user.authentications.find(:first, :conditions => { :provider => 'flickr' })
     @auth1 = flickr.auth.checkToken :auth_token => auth['token']
   end
+  
+  def charge_image_from_params
+    @picture = Picture.new(params[:picture])
+  end
+  
+  def verify_image!
+    if !@picture.project.can_post_picture?
+      format.html { redirect_to([current_user,@picture.project], :notice => 'THIS PROJECT DOES NOT ACCEPT ANY NEW PICTURES') }
+      format.xml  { head :forbidden}
+    elsif !@picture.project.can_have_new_picture?
+      format.html { redirect_to([current_user,@picture.project], :notice => 'YOU ALREADY POSTED ONE PICTURE FOR THIS PROJECT DURING THE CURRENT PERIOD') }
+      format.xml  { head :forbidden}
+    end
+    
+  end
 
   def globalIndex
-    @pictures = Picture.all
+    @pictures = Picture.desc(:postDate).all
     render :index
   end
 
@@ -72,7 +89,7 @@ class PicturesController < ApplicationController
   # POST /pictures
   # POST /pictures.xml
   def create
-    @picture = Picture.new(params[:picture])
+    
     @picture.postDate = Time.now
     if (@picture.flickr)
       hash = Hash.try_convert flickr.photos.getInfo(:photo_id => @picture.flickr)
@@ -84,15 +101,7 @@ class PicturesController < ApplicationController
       @picture.flickr = hash
     end
 
-    respond_to do |format|
-      if !@picture.project.can_post_picture?
-        format.html { redirect_to([current_user,@picture.project], :notice => 'THIS PROJECT DOES NOT ACCEPT ANY NEW PICTURES') }
-        format.xml  { head :forbidden}
-      elsif !@picture.project.can_have_new_picture?
-        format.html { redirect_to([current_user,@picture.project], :notice => 'YOU ALREADY POSTED ONE PICTURE FOR THIS PROJECT DURING THE CURRENT PERIOD') }
-        format.xml  { head :forbidden}
-      else
-        
+    respond_to do |format|  
         if @picture.save
           if (@picture.project.pictures.size == @picture.project.size)
             p = @picture.project
@@ -106,7 +115,7 @@ class PicturesController < ApplicationController
           format.html { render :action => "new" }
           format.xml  { render :xml => @picture.errors, :status => :unprocessable_entity }
         end
-      end
+      
     end
   end
 

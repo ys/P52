@@ -31,7 +31,17 @@ class User
   
   def pictures
     projects = Project.where(:user_id => id).map(&:_id)
-    Picture.where(:project_id.in => projects)
+    Picture.desc(:postDate).where(:project_id.in => projects)
+  end
+  
+  def last_picture
+    projects = Project.where(:user_id => id).map(&:_id)
+    picture= Picture.where(:project_id.in => projects).desc(:postDate).first
+    if picture
+      picture.url_m
+    else
+     'blank.gif'
+    end
   end
   
   def can_have_project? size

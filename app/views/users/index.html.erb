@@ -1,6 +1,6 @@
 <% @users.each do |user| %>
 <article class="index_users">
-  		<%= link_to image_tag(user.avatar_url), user%><br/>
+  		<div><%= link_to image_tag(user.last_picture), user%></div>
 <header><%= link_to user.name, user %></header>
 </article>
 <% end %>

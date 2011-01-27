@@ -4,7 +4,7 @@ class Picture
   
   
   field :pictureId, :type => Integer
-  field :postDate, :type => Date
+  field :postDate, :type => Time
   field :description, :type => String
   field :title, :type => String
   referenced_in :project, :inverse_of => :pictures
@@ -34,5 +34,5 @@ class Picture
   def url_t(); PHOTO_SOURCE_URL % [flickr['farm'], flickr['server'], flickr['id'], flickr['secret'], "_t", "jpg"] end
   def url_b(); PHOTO_SOURCE_URL % [flickr['farm'], flickr['server'], flickr['id'], flickr['secret'], "_b", "jpg"] end
   def url_z(); PHOTO_SOURCE_URL % [flickr['farm'], flickr['server'], flickr['id'], flickr['secret'], "_z", "jpg"] end
-
+  def url_o(); PHOTO_SOURCE_URL % [flickr['farm'], flickr['server'], flickr['id'], flickr['secret'], "_o", "jpg"] end
 end
