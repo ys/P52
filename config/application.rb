@@ -61,7 +61,7 @@ module P52
       g.orm             :mongoid
     end
     
-    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+    config.action_mailer.default_url_options = { :host => 'p52.eatcupcak.es' }
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

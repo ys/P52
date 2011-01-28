@@ -13,7 +13,7 @@ P52::Application.configure do
   config.action_dispatch.x_sendfile_header = "X-Sendfile"
   
   
-  config.action_mailer.default_url_options = { :host => 'eatcupcak.es' }
+  config.action_mailer.default_url_options = { :host => 'p52.eatcupcak.es' }
   ### ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
