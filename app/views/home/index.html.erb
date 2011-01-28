@@ -1,9 +1,18 @@
-<h1>Home#index</h1>
+<% @pictures.each do |picture| %>
+	<article class="index_home">
+  		<div><%= link_to (image_tag picture.url_m), picture.url, :rel =>'shadowbox[img]' %></div>
+		<header>by <%=picture.user.name%></header>
+	</article>
+<% end %>
+</div>
+<div class="container">
 <h2>Users: </h2>
 <p>
 <% @users.each do |user| %>
   <%= link_to user.name, user %>  
 <% end %></p>
+</div>
+<div class="container">
 <h2>Projects</h2>
 <p>
 <% @projects.each do |project| %>
@@ -11,7 +20,4 @@
 <% end %></p>
 <h2>Images</h2>
 
-<% @pictures.each do |picture| %>
-  <%= link_to (image_tag picture.url_s), [picture.user,picture] %>
-<% end %>
 
