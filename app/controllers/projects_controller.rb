@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.asc(:title).find(:conditions =>{:user_id => @user.id})
+    @projects = Project.asc(:title).where(:user_id => @user.id)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @projects }
