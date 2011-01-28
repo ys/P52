@@ -11,4 +11,9 @@ class ApplicationController < ActionController::Base
   def current_user_load
     @user = current_user
   end
+  def must_be_auth_with_flickr!
+    if !current_user.authenticated_to_flickr?
+      redirect_to(authentications_url, :notice => 'YOU MUST AUTHENTICATE TO FLICKR TO POST!')
+    end
+  end
 end

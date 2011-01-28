@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
 
   before_filter :authenticate_user! ,:except =>[:show, :index, :globalIndex]
+  before_filter :must_be_auth_with_flickr! , :only => [:new,:archive,:edit,:create, :update, :destroy]
   before_filter :preload_user , :only =>[:show, :index]
   before_filter :current_user_load, :only =>[:archive,:edit,:create, :update, :destroy]
   before_filter :preload_project, :only => [:archive,:show, :edit, :update, :destroy]

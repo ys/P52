@@ -19,6 +19,13 @@ P52::Application.routes.draw do
     resources :projects, :only =>[:show,:index]
     resources :pictures, :only =>[:index, :show]
   end
+  #match '/users' => 'users#index'
+  #match '/:id' => 'users#show'
+  #match '/:user_id/projects' => 'projects#index'
+  #match '/:user_id/projects/:id' => 'projects#show'
+  #match '/:user_id/pictures' => 'pictures#index'
+  #match '/:user_id/pictures/:id' => 'pictures#show'
+  match '/account' => 'users#account'
   match '/users/:id/:size' => 'users#current_project'
   match '/users/:id/recent_tweets' => 'users#recent_tweets'
   match '/users/:id/last_pictures' => 'users#last_pictures'

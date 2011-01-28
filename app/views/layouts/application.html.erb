@@ -24,10 +24,12 @@
 	<header class="main">
 		<span id="title">fifty two</span>
 		<nav class="hmenu">
-		  <%= render 'devise/menu/registration_items' %>
-		  <%= render 'devise/menu/login_items' %>
+		  
+		  
 		  <%= render 'layouts/menu' %>
 		  <%= render 'layouts/menu_auth' %>
+		<%= render 'devise/menu/login_items' %>
+		<%= render 'devise/menu/registration_items' %>
 		</nav>
 		<span class="alerts"><p class="notice"><%= notice %></p>
 		<p class="alert"><%= alert %></p></span>
