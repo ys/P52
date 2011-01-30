@@ -16,7 +16,7 @@
 <h2>Projects</h2>
 
 <% @projects.each do |project| %>
-  <%= link_to project.title, [project.user,project] %>  
+  <%= link_to project.title, user_project_path(project.user,project) %>  
 <% end %>
 
 

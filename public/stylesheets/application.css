@@ -86,7 +86,10 @@ p.notice {
 p.alert {
   color: red;  
 }
-
+.alerts{
+	float:right;
+	margin:10px;
+}
 .authentications {
   margin-bottom: 30px;
 }
