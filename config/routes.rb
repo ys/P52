@@ -2,7 +2,7 @@ P52::Application.routes.draw do
 
   root :to => "home#index"
   
-  resources :projects, :except =>[:show,:index] do
+  resources :projects, :except =>[:show,:index]  do
     member do
         put 'archive'
       end

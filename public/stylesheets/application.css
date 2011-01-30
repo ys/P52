@@ -204,7 +204,8 @@ article[class^="index"] div{
 }
 
 article[class^="index"] img{	
-	width:200px;
+	min-width:200px;
+	min-height:134px;
 }
 
 article[class^="index"] header a{
