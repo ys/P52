@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
   def index
-    @users = User.all
-    @projects = Project.all
-    @pictures = Picture.all
+    @users = User.asc(:name).all
+    @projects = Project.asc(:title).all
+    @pictures = Picture.desc(:postDate).all
   end
 
 end
