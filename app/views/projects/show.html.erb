@@ -1,5 +1,5 @@
 <% content_for :atom do%>
-	<%= auto_discovery_link_tag(:atom, project_feed_url(@project.user,@project))%>
+	<%= auto_discovery_link_tag(:atom, project_feed_url(@project.user,@project, :format=>"atom"))%>
 <% end %>
 <article class="show_project">
 <header class="show_project_header">
