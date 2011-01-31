@@ -2,7 +2,7 @@ P52::Application.routes.draw do
 
   root :to => "home#index"
   
-  resources :projects, :except =>[:show,:index]  do
+  resources :projects, :except =>[:show,:index], :constraints => { :id => /.*/ }  do
     member do
         put 'archive'
     end
@@ -18,8 +18,8 @@ P52::Application.routes.draw do
 
   devise_for :users
   
-  resources :users, :only => [:show, :index] do
-    resources :projects, :only =>[:show,:index] do
+  resources :users, :only => [:show, :index], :constraints => { :id => /.*/ } do
+    resources :projects, :only =>[:show,:index], :constraints => { :id => /.*/ } do
       get 'feed'
     end
     resources :pictures, :only =>[:index, :show]
@@ -31,10 +31,10 @@ P52::Application.routes.draw do
   #match '/:user_id/pictures' => 'pictures#index'
   #match '/:user_id/pictures/:id' => 'pictures#show'
   match '/account' => 'users#account'
-  match '/users/:id/:size' => 'users#current_project'
-  match '/users/:id/recent_tweets' => 'users#recent_tweets'
-  match '/users/:id/last_pictures' => 'users#last_pictures'
-  match '/users/:id/galleries' => 'users#galleries'
+  match '/users/:id/:size' => 'users#current_project', :constraints => { :id => /.*/ }
+  match '/users/:id/recent_tweets' => 'users#recent_tweets', :constraints => { :id => /.*/ }
+  match '/users/:id/last_pictures' => 'users#last_pictures', :constraints => { :id => /.*/ }
+  match '/users/:id/galleries' => 'users#galleries', :constraints => { :id => /.*/ }
   match '/auth/:provider/callback' => 'authentications#create'
   # The priority is based upon order of creation:
   # first created -> highest priority.
