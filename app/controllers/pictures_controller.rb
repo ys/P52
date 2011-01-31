@@ -58,7 +58,7 @@ class PicturesController < ApplicationController
   end
 
   def globalIndex
-    @pictures = Picture.desc(:postDate).all
+    @pictures = Picture.desc(:postDate)
     render :index
   end
 

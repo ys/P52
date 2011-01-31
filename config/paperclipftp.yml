@@ -1,0 +1,12 @@
+development:
+    host: ftp.eatcupcak.es
+    username: eatcupca
+    password: 28Mars84
+test:
+    host: ftp.eatcupcak.es
+    username: eatcupca
+    password: 28Mars84
+production:
+    host: ftp.eatcupcak.es
+    username: eatcupca
+    password: 28Mars84

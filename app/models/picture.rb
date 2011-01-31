@@ -10,17 +10,6 @@ class Picture
   referenced_in :project, :inverse_of => :pictures
   field :flickr, :type => Hash
 
-  has_attached_file :image,
-    :url => "/images/user/:project.user.name/projects/:project_name/:id/:style.:extension" ,
-    :path           => 'public/images/avatars/:id/:style.:extension',
-  :styles => {
-    :original => ['1920x1680>', :jpg],
-    :square    => ['100x100#',   :jpg],
-    :small    => ['150x100#',   :jpg],
-    :medium   => ['250x250',    :jpg],
-    :large    => ['500x500>',   :jpg]
-  }
-
   def user
     project.user
   end
@@ -35,4 +24,5 @@ class Picture
   def url_b(); PHOTO_SOURCE_URL % [flickr['farm'], flickr['server'], flickr['id'], flickr['secret'], "_b", "jpg"] end
   def url_z(); PHOTO_SOURCE_URL % [flickr['farm'], flickr['server'], flickr['id'], flickr['secret'], "_z", "jpg"] end
   def url_o(); PHOTO_SOURCE_URL % [flickr['farm'], flickr['server'], flickr['id'], flickr['secret'], "_o", "jpg"] end
+
 end
