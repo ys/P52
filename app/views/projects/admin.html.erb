@@ -1,0 +1,14 @@
+
+<% @projects.each do |project| %>
+	<article class="admin_project">
+  	<div><%= link_to image_tag(project.url_m), [project.user,project] %></div>
+	<header><a href='<%= user_project_path(project.user,project)%>'><%= project.size %> - <%= project.title %></a><br/>
+   	<%= link_to 'Edit', edit_project_path(project) if (user_owns? project ) %> I
+	<%= link_to '+ Picture', new_project_picture_path(project) if (user_owns? project ) %> I
+    <%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete if (user_owns? project )%> I
+	<%= link_to('Archive', archive_project_path(project), :confirm => 'Are you sure?', :method => :put)if (user_owns? project)%>
+	</header>
+	</article>
+<% end %>
+
+
