@@ -1,10 +1,12 @@
 class PicturesController < ApplicationController
   before_filter :authenticate_user! ,:except =>[:show, :index, :globalIndex]
-  before_filter :must_be_auth_with_flickr! , :only => [:new,:archive,:edit,:create, :update, :destroy]
+  before_filter :must_be_auth_with_flickr! , :only => [:new,:archive,:edit,:create, :update, :destroy, :admin]
   before_filter :preload_user, :only =>[:show,:index]
-  before_filter :current_user_load, :only =>[:new,:edit,:create, :update, :destroy]
+  before_filter :current_user_load, :only =>[:new,:edit,:create, :update, :destroy, :admin]
+  
+  before_filter :must_have_active_project! , :only=>[:new,:create,:update,:edit, :destroy]
 
-  before_filter :preload_picture!, :except=>[:globalIndex, :new,:index,:create]
+  before_filter :preload_picture!, :except=>[:globalIndex, :new,:index,:create, :admin]
   before_filter :load_flickraw, :only=>[:create, :new, :edit, :update]
   before_filter :preload_new_edit, :only=>[:new, :edit]
   before_filter :charge_image_from_params , :only => [:create]
@@ -28,6 +30,16 @@ class PicturesController < ApplicationController
     FlickRaw.shared_secret='7248d7d35fd2b1d5'
     auth = @user.authentications.find(:first, :conditions => { :provider => 'flickr' })
     @auth1 = flickr.auth.checkToken :auth_token => auth['token']
+  end
+  
+  def must_have_active_project!
+    projects = Project.where(:user_id => current_user.id, :closed => false, :current => true).all
+    if projects.empty?
+      #false
+      redirect_to new_project_path
+    else
+      #true
+    end
   end
   
   def charge_image_from_params
@@ -154,5 +166,10 @@ class PicturesController < ApplicationController
       format.html { redirect_to(pictures_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  
+  def admin
+     @pictures = @user.pictures 
   end
 end

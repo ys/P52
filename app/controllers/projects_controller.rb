@@ -1,10 +1,10 @@
 class ProjectsController < ApplicationController
 
   before_filter :authenticate_user! ,:except =>[:show, :index, :globalIndex]
-  before_filter :must_be_auth_with_flickr! , :only => [:new,:archive,:edit,:create, :update, :destroy]
-  before_filter :preload_user , :only =>[:show, :index]
-  before_filter :current_user_load, :only =>[:archive,:edit,:create, :update, :destroy]
-  before_filter :preload_project, :only => [:archive,:show, :edit, :update, :destroy]
+  before_filter :must_be_auth_with_flickr! , :only => [:new,:archive,:edit,:create, :update, :destroy, :admin]
+  before_filter :preload_user , :only =>[:show, :index, :feed]
+  before_filter :current_user_load, :only =>[:archive,:edit,:create, :update, :destroy, :admin]
+  before_filter :preload_project, :only => [:archive,:show, :edit, :update, :destroy, :feed]
   before_filter :user_owns_project! ,:only => [:edit, :update, :destroy]
 
   def user_owns_project!
@@ -17,7 +17,8 @@ class ProjectsController < ApplicationController
   end
 
   def preload_project
-    @project = Project.asc(:title).where(:user_id => @user.id, :title =>params[:id]).first
+    project_title = params[:id] || params[:project_id]
+    @project = Project.asc(:title).where(:user_id => @user.id, :title =>project_title).first
   end
 
 
@@ -39,6 +40,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.xml
   def show
+    puts @project
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @project }
@@ -126,4 +128,16 @@ class ProjectsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def admin 
+    @projects = Project.asc(:title).where(:user_id => @user.id)
+  end
+  
+  def feed
+    respond_to do |format|
+      format.atom
+    end
+  end
+  
+  
 end

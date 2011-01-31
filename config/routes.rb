@@ -5,10 +5,13 @@ P52::Application.routes.draw do
   resources :projects, :except =>[:show,:index]  do
     member do
         put 'archive'
-      end
+    end
+    get 'admin', :on => :collection
     resources :pictures, :only =>[:new]
   end 
-  resources :pictures, :except =>[:index]
+  resources :pictures, :except =>[:index] do
+    get 'admin', :on => :collection
+  end
   match '/pictures' => 'pictures#globalIndex'
   match '/projects' => 'projects#globalIndex'
   resources :authentications
@@ -16,7 +19,9 @@ P52::Application.routes.draw do
   devise_for :users
   
   resources :users, :only => [:show, :index] do
-    resources :projects, :only =>[:show,:index]
+    resources :projects, :only =>[:show,:index] do
+      get 'feed'
+    end
     resources :pictures, :only =>[:index, :show]
   end
   #match '/users' => 'users#index'

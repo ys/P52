@@ -1,4 +1,6 @@
-
+<% content_for :atom do%>
+	<%= auto_discovery_link_tag(:rss, project_feed_url(@project.user,@project))%>
+<% end %>
 <article class="show_project">
 <header class="show_project_header">
   <%= @project.title %> - 
@@ -23,8 +25,8 @@
 </div>
 <div class="container">
 	<% @project.pictures.each do |picture| %>
-		<article class="index_picture">
-		<div><%=link_to image_tag(picture.url_m) , picture.url , :rel=>'shadowbox[cat]'%></div>
+		<article class="index_project">
+		<div><%=link_to image_tag(picture.url_m) , picture.url_z , :rel=>'shadowbox[cat]'%></div>
 		<header>by <%= link_to picture.user.name, picture.user%></header>
 	    <span class="index_picture_buttons"<%= link_to 'Edit', edit_picture_path(picture) if user_owns? picture%>
 	    <%= link_to 'Destroy', picture, :confirm => 'Are you sure?', :method => :delete if user_owns? picture %></span>
@@ -32,9 +34,5 @@
 	<% end %>
 </div>
 <span class="show_project_buttons">
-<% if (user_owns_project? @project )%>
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Add Picture', new_project_picture_path(@project )%> |
-<%end%>
 <%= link_to 'Back', user_projects_path(@user) %>
 </span>

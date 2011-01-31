@@ -2,9 +2,7 @@
 <% @pictures.each do |picture| %>
 	<article class="index_picture">
 	<div><%=link_to image_tag(picture.url_m) , picture.url , :rel=>'shadowbox[cat]'%></div>
-	<header>by <%= link_to picture.user.name, picture.user%></header>
-    <span class="index_picture_buttons"<%= link_to 'Edit', edit_picture_path(picture) if user_owns? picture%>
-    <%= link_to 'Destroy', picture, :confirm => 'Are you sure?', :method => :delete if user_owns? picture %></span>
+	<header><%= link_to picture.flickr["title"], picture%> by <%= link_to picture.user.name, picture.user%></header>
 	</article>
 <% end %>
 

@@ -48,6 +48,10 @@ a img {
 }
 a{
 	text-decoration:none;
+	color:black;
+}
+a:hover{
+	text-decoration:underline;
 }
 
 .container{
@@ -67,17 +71,15 @@ nav.hmenu li {
 }
 .hmenu {
 	position:absolute;
-	font-size:15px;
+	font-size:13px;
 	right:20px;
-	bottom:15px;
+	top:20px;
 }
 .hmenu li{
-	background:grey;
-	padding:5px;
+	
+	padding:1px;
 	margin:3px;
-	border-radius:4px;
-	-webkit-border-radius:4px;
-	-moz-border-radius:4px;
+
 }
 p.notice {
   color: green;
@@ -179,14 +181,20 @@ header.main a {
 	color:black;
 	text-decoration:none;
 }
+header.main a:hover{
+	text-decoration:underline;
+}
 header.main a:visited {
 	color:black;
 	text-decoration:none;
 }
+header.main a:active{
+	text-decoration:underline;
+}
 .index_picture_buttons, .show_picture_buttons, .index_project_buttons, .show_project_buttons{
 	display:none;
 }
-article[class^="index"]{
+article[class^="index"], article[class^="admin"]{
 	font-size:10px;
 	width:200px;
 	margin-right:35px;
@@ -195,7 +203,7 @@ article[class^="index"]{
 	float:left;
 	position:relative;
 }
-article[class^="index"] div{
+article[class^="index"] div, article[class^="admin"] div{
 	width:200px;
 	height:134px;
 	overflow:hidden;
@@ -203,12 +211,17 @@ article[class^="index"] div{
 	background:grey;
 }
 
-article[class^="index"] img{	
+article[class^="index"] img, article[class^="admin"] img{	
 	min-width:200px;
 	min-height:134px;
 }
 
-article[class^="index"] header a{
+article[class^="show"] img{	
+	width:800px;
+
+}
+
+article[class^="index"] header a, article[class^="admin"] header a{
 	font-size:10px;
 	color:black;
 	text-decoration:none;
@@ -228,6 +241,15 @@ article[class^="index"] header{
 	top:20px;
 	
 }
+article[class^="admin"] header{
+ 
+	margin:2px;
+	color:black;
+	position:absolute;
+	top:134px;
+	
+}
+
 article[class^="index"]:hover header{
 	top:134px;
 	opacity:1;
@@ -251,6 +273,7 @@ text-decoration:underline;
 
 .container.project a:hover {
 	opacity:1;
+	
 }
 .container{
 	margin-bottom:40px;
