@@ -134,6 +134,9 @@ nav.hmenu li {
 	margin-left:auto;
 	margin-right:auto;
 }
+.hmenu.small{
+	width:440px;
+}
 .hmenu li{
 	
 	margin:10px;

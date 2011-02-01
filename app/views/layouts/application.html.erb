@@ -25,7 +25,7 @@
 	<header class="main">
 		<span id="title"><%= 'Fifty Two'.upcase%></span>
 		
-		<nav class="hmenu">
+		<nav class="hmenu <% if !user_signed_in? %>small<%end%>">
 		  
 		  
 		  <%= render 'layouts/menu' %>
