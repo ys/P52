@@ -1,5 +1,5 @@
 <% if user_signed_in? && current_user.authenticated_to_flickr? %>
- 
+ <li><%= link_to '+ Project', new_project_path %></li><li> <%= link_to '+ Picture', new_picture_path %></li>
 <% elsif user_signed_in? %>
   <li>
   <%= link_to('Authenticate to Flickr!', authentications_path, :class=> 'alert') %>

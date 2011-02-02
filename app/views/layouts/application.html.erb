@@ -2,8 +2,11 @@
 <html>
 <head>
   <title>fifty two</title>
+<link href='http://fonts.googleapis.com/css?family=Arvo:regular,bold' rel='stylesheet' type='text/css'>
+
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
+
   <%= csrf_meta_tag %>
   <%= yield :atom %>
   <script>
@@ -17,14 +20,14 @@
 	    };
 
 	    Shadowbox.init(options);
-
+		$('.hmenu li:not(:last)').after('<li>•</li>');
 	});
   </script>
 </head>
 <body>
 	<header class="main">
-		<span id="title"><%= 'Fifty Two'.upcase%></span>
-		
+		<div id="title"><img src="/images/backlogo.png"/><span><%= '52'.upcase%></span></div>
+		<div id="menubar">
 		<nav class="hmenu <% if !user_signed_in? %>small<%end%>">
 		  
 		  
@@ -33,6 +36,7 @@
 		<%= render 'devise/menu/login_items' %>
 		<%= render 'devise/menu/registration_items' %>
 		</nav>
+		</div>
 	</header>
 	<span class="alerts"><p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p></span>

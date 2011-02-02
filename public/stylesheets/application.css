@@ -24,6 +24,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
 	clear: both;
 	font-weight: normal;
+	font-family:'Arvo';
 }
 ol, ul {
 	list-style: none;
@@ -39,7 +40,7 @@ del {
 	text-decoration: line-through;
 }
 
-body { background-color: white; color: #333; background : url('/images/logo.png') no-repeat;}
+body { background-color: white; color: #333; }
 
 body, p, ol, ul, td {
   font-family: arial, helvetica, sans-serif;
@@ -122,29 +123,38 @@ nav.hmenu {
 nav.hmenu li {
   float: left;  
 }
-.hmenu {
-	margin-top:140px;
+
+#menubar{
+	width:960px;
+	margin-left:auto;
+	margin-right:auto;
 	height:40px;
-	display:block;
-	font-size:30px;
-	font-family:'LaterOnRegular';
-	width:600px;
 	border-top:solid 1px #67605c;
 	border-bottom: dotted 1px #67605c;
+}
+.hmenu {
+	height:40px;
+	display:block;
+	font-size:20px;
+	font-weight:light;
+	font-family:'Arvo';
+	width:640px;
+	text-align: center;
+	
 	margin-left:auto;
 	margin-right:auto;
 }
 .hmenu.small{
-	width:440px;
+	width:480px;
 }
 .hmenu li{
 	
-	margin:10px;
-	margin-left:18px;
+	margin:5px;
+	margin-top:13px;
 
 }
 .hmenu li a {
-	font-family:'LaterOnRegular';
+	font-family:'Arvo';
 }
 p.notice {
   color: green;
@@ -228,17 +238,31 @@ input[type="radio"]:checked + img{
 
 
 #title{
-	font-size:50px;
-	height:200px;
+	position:relative;
+	height:130px;
 	width:200px;
-	color:rgba(0,0,0,0);
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
 
 	
-	font-family:'LaterOnRegular';
+	
 }
-
+#title img{
+	width:200px;
+	position:absolute;
+	bottom:0;
+}
+#title span{
+	font-size:80px;
+	color:white;
+	position:absolute;
+	font-family:'Arvo';
+	bottom:35px;
+	left:58px;
+}
 header.main{
-	height:200px;
+	height:150px;
 	margin:0;
 
 	position:relative;
@@ -265,7 +289,8 @@ header.main a:active{
 article[class^="index"], article[class^="admin"]{
 	font-size:10px;
 	width:200px;
-	margin-right:35px;
+	margin-left:17px;
+	margin-right:17px;
 	height:200px;
 	overflow:hidden;
 	float:left;
