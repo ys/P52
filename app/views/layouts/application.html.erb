@@ -34,6 +34,7 @@
 		if($('.alert').html() == '') $('.alerts').hide();
 		$('#close_alerts').click(function(){
 			$(this).parent().hide();
+			return false;
 		});
 		$('.hmenu li:not(:last)').after('<li>•</li>');
 	});
