@@ -1,3 +1,16 @@
+	<div class="functions">
+		You want to post :
+		<ul>
+			<li>One picture a day?</li>
+			<li>Once a month?</li>
+			<li>Or once a week?</li>
+		</ul>
+	</div>
+	<div class="signupDiv">
+		<%= link_to('Sign up', new_user_registration_path)  %>
+	</div>
+</div>
+<div class="container pictures">
 <% @pictures.each do |picture| %>
 	<article class="index_home">
   		<div><%= link_to (image_tag picture.url_m), picture.url_b, :rel =>'shadowbox[img]' %><%= link_to (image_tag picture.url_m), picture%></div>

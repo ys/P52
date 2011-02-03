@@ -236,6 +236,41 @@ p.alert {
   margin-bottom: 10px;
 }
 
+.functions{
+	font-size:40px;
+	font-family:'Arvo';
+	float:left;
+	width:450px;
+	height:300px;
+	
+}
+.signupDiv{
+	width:450px;
+	float:left;
+	height:300px;
+	text-align:center;
+}
+.signupDiv a{
+	margin-top:75px;
+	font-size:50px;
+	font-family:'Arvo';
+	display:block;
+}
+
+.functions ul{
+	margin-top:40px;
+	margin-left:35px;
+	font-size:40px;
+	list-style-type:square;
+	
+	
+}
+
+.functions li{
+	height:50px;
+	font-family:'Arvo';
+}
+
 input[type="radio"]{
 	display:none;
 }
@@ -371,10 +406,10 @@ article[class^="index"]:hover header{
 }
 header.main a.alert {
   color: red;
-text-decoration:underline;
+	text-decoration:underline;
 }
 .container.project h2{
-	margin-bottom:10px;
+	margin-bottom:20px;
 }
 .container.project a {
 	font-size:15px;
@@ -391,7 +426,7 @@ text-decoration:underline;
 	
 }
 .container{
-	margin-bottom:40px;
+	margin-top:30px;
 }
 header{
 	font-family:'Arvo';
