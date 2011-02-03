@@ -244,9 +244,10 @@ p.alert {
 	height:300px;
 	
 }
+
 .signupDiv{
 	width:450px;
-	float:left;
+	float:right;
 	height:300px;
 	text-align:center;
 }
