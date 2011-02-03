@@ -104,7 +104,7 @@ a img {
 }
 a{
 	text-decoration:none;
-	color:black;
+	color:#333;
 }
 a:hover{
 	text-decoration:underline;
@@ -317,17 +317,17 @@ header.main{
 
 	position:relative;
 	
-	color:black;
+	color:#333;
 }
 header.main a {
-	color:black;
+	color:#333;
 	text-decoration:none;
 }
 header.main a:hover{
 	text-decoration:underline;
 }
 header.main a:visited {
-	color:black;
+	color:#333;
 	text-decoration:none;
 }
 header.main a:active{
@@ -374,7 +374,7 @@ article[class^="show"] img{
 
 article[class^="index"] header a, article[class^="admin"] header a{
 	font-size:10px;
-	color:black;
+	color:#333;
 	text-decoration:none;
 	
 	
@@ -385,7 +385,7 @@ article[class^="index"] header{
 	transition-property: all; 
 	transition-duration: 0.5s; 
 	margin:2px;
-	color:black;
+	color:#333;
 	opacity:0;
 	z-index:-5;
 	position:absolute;
@@ -395,7 +395,7 @@ article[class^="index"] header{
 article[class^="admin"] header{
  
 	margin:2px;
-	color:black;
+	color:#333;
 	position:absolute;
 	top:134px;
 	
@@ -409,12 +409,15 @@ header.main a.alert {
   color: red;
 	text-decoration:underline;
 }
+.container.project, .container.pictures{
+	padding:20px 0 0 0;
+}
 .container.project h2{
 	margin-bottom:20px;
 }
 .container.project a {
 	font-size:15px;
-	color:black;
+	color:#333;
 	opacity:0.5;
 	-webkit-transition-property: all;
 	-webkit-transition-duration: 0.5s;
@@ -426,15 +429,21 @@ header.main a.alert {
 	opacity:1;
 	
 }
-.container{
-	margin-top:30px;
-}
+
 header{
 	font-family:'Arvo';
 	margin-top:10px;
 }
 header a{
 	font-family:'Arvo';
+}
+header[class^="show"] h2{
+	
+	margin-bottom:15px;
+}
+header[class^="show"]{
+	font-size:20px;
+	margin-bottom:20px;
 }
 header[class^="show_picture"]{
 	float:right;
