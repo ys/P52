@@ -1,3 +1,4 @@
+<% if !user_signed_in?%>
 	<div class="functions">
 		You want to post :
 		<ul>
@@ -11,6 +12,7 @@
 	</div>
 </div>
 <div class="container pictures">
+<%end%>
 <% @pictures.each do |picture| %>
 	<article class="index_home">
   		<div><%= link_to (image_tag picture.url_m), picture.url_b, :rel =>'shadowbox[img]' %><%= link_to (image_tag picture.url_m), picture%></div>

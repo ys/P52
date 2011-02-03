@@ -31,12 +31,17 @@
 			
 		
 		});
+		if($('.alert').html() == '' && $('.notice').html() == '') $('.alerts').hide();
+		$('#close_alerts').click(function(){
+			$(this).parent().hide();
+		});
 		$('.hmenu li:not(:last)').after('<li>•</li>');
 	});
   </script>
 </head>
 <body>
 	<header class="main">
+		
 		<div id="title"><img src="/images/backlogo.png"/><span><%= link_to '52'.upcase , '/'%></span></div>
 		<div id="menubar">
 		<nav class="hmenu <% if !user_signed_in? %>small<%end%>">
@@ -49,7 +54,7 @@
 		</div>
 	</header>
 	<span class="alerts"><p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p></span>
+	<p class="alert"><%= alert %></p><a id="close_alerts" href="#close">[close]</a></span>
 	<div class="container main">
 	<%= yield %>
 	</div>
