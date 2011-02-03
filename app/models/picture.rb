@@ -1,6 +1,7 @@
 class Picture
   include Mongoid::Document
   include Mongoid::Paperclip
+  include Mongoid::Timestamps
   
   
   field :pictureId, :type => Integer

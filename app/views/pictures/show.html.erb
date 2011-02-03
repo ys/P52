@@ -1,5 +1,5 @@
 <article class="show_picture">
-<%=image_tag @picture.url%><br/>
+<%=image_tag @picture.url_b%><br/>
 <span class="picture_title"><%= @picture.title if (@picture.title && !@picture.title.empty?)%> <%= 'This picture is' if (!@picture.title || @picture.title.empty?)%> in <%= link_to @picture.project.title, [@picture.user,@picture.project] %></span><br/>
 <span class="picture_user">By <%= @picture.user.name%></span><br/>
   </article>

@@ -1,5 +1,7 @@
 class Authentication
   include Mongoid::Document
+  include Mongoid::Timestamps
+  
   field :provider, :type => String
   field :uid, :type => String
   field :token, :type => String

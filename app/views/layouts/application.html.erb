@@ -14,28 +14,38 @@
 
 	    var options = {
 	        resizeLgImages:     true,
-	        displayNav:         false,
+	        displayNav:         true,
 	        handleUnsupported:  'remove',
 	        keysClose:          ['c', 27] // c or esc
 	    };
 
 	    Shadowbox.init(options);
+		$('#shadowButton').click(function(){
+			$('a[rel^="shadowbox"]').toggle();
+			$('a[rel^="shadowbox"]').next().toggle();
+			if($(this).css('opacity')<1)
+				$(this).css('opacity',1);
+			else
+				$(this).css('opacity',0.2);
+			return false;
+			
+		
+		});
 		$('.hmenu li:not(:last)').after('<li>•</li>');
 	});
   </script>
 </head>
 <body>
 	<header class="main">
-		<div id="title"><img src="/images/backlogo.png"/><span><%= '52'.upcase%></span></div>
+		<div id="title"><img src="/images/backlogo.png"/><span><%= link_to '52'.upcase , '/'%></span></div>
 		<div id="menubar">
 		<nav class="hmenu <% if !user_signed_in? %>small<%end%>">
-		  
-		  
 		  <%= render 'layouts/menu' %>
 		  <%= render 'layouts/menu_auth' %>
 		<%= render 'devise/menu/login_items' %>
 		<%= render 'devise/menu/registration_items' %>
 		</nav>
+		<a id="shadowButton" href="#">shadow</a>
 		</div>
 	</header>
 	<span class="alerts"><p class="notice"><%= notice %></p>

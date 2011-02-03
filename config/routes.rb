@@ -1,7 +1,7 @@
 P52::Application.routes.draw do
 
   root :to => "home#index"
-  
+  match '/random' => 'home#random'
   resources :projects, :except =>[:show,:index], :constraints => { :id => /.*/ }  do
     member do
         put 'archive'

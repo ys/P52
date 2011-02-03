@@ -1,6 +1,6 @@
 <% @pictures.each do |picture| %>
 	<article class="index_home">
-  		<div><%= link_to (image_tag picture.url_m), picture.url, :rel =>'shadowbox[img]' %></div>
+  		<div><%= link_to (image_tag picture.url_m), picture.url_b, :rel =>'shadowbox[img]' %><%= link_to (image_tag picture.url_m), picture%></div>
 		<header>by <%=picture.user.name%></header>
 	</article>
 <% end %>

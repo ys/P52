@@ -8,14 +8,19 @@ class PicturesController < ApplicationController
 
   before_filter :preload_picture!, :except=>[:globalIndex, :new,:index,:create, :admin]
   before_filter :load_flickraw, :only=>[:create, :new, :edit, :update]
-  before_filter :preload_new_edit, :only=>[:new, :edit]
+  before_filter :preload_new_edit, :only=>[:new]
   before_filter :charge_image_from_params , :only => [:create]
   #before_filter :verify_image! , :only=>[:create]
 
   def preload_new_edit
-    #@pictures = flickr.photos.search(:user_id => 'me', :min_upload_date => (Time.now-1.day).to_i , :max_upload_date => Time.now.to_i )
-    @pictures = flickr.photos.search(:user_id => 'me')
+    
+    #@pictures = flickr.photos.search(:user_id => 'me')
+    @project = Project.find(:first, :conditions => {:title =>params[:project_id], :user_id =>@user.id})if (params[:project_id])
     @projects = Project.find(:conditions => {:user_id => @user.id})
+    back_to = 32
+    back_to = (365/@project.size)+1 if @project
+    
+    @pictures = flickr.photos.search(:user_id => 'me', :min_upload_date => (Time.now-back_to.day).to_i , :max_upload_date => Time.now.to_i )
   end
 
   def preload_picture!
@@ -85,7 +90,7 @@ class PicturesController < ApplicationController
   # GET /pictures/new.xml
   def new
     @picture = Picture.new
-    @project = Project.find(:first, :conditions => {:title =>params[:project_id], :user_id =>@user.id})if (params[:project_id])
+    
     @picture.project = @project
     respond_to do |format|
       format.html # new.html.erb

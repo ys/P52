@@ -26,7 +26,7 @@
 <div class="container">
 	<% @project.pictures.each do |picture| %>
 		<article class="index_project">
-		<div><%=link_to image_tag(picture.url_m) , picture.url_z , :rel=>'shadowbox[cat]'%></div>
+		<div><%=link_to image_tag(picture.url_m) , picture.url_b , :rel=>'shadowbox[cat]'%><%=link_to image_tag(picture.url_m) , picture%></div>
 		<header>by <%= link_to picture.user.name, picture.user%></header>
 	    <span class="index_picture_buttons"<%= link_to 'Edit', edit_picture_path(picture) if user_owns? picture%>
 	    <%= link_to 'Destroy', picture, :confirm => 'Are you sure?', :method => :delete if user_owns? picture %></span>

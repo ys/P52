@@ -1,6 +1,7 @@
 class User
   include Mongoid::Document
   include Mongoid::Paperclip
+  include Mongoid::Timestamps
   
   field :name
   embeds_many :authentications

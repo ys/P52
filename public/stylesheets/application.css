@@ -131,11 +131,13 @@ nav.hmenu li {
 	height:40px;
 	border-top:solid 1px #67605c;
 	border-bottom: dotted 1px #67605c;
+	position:relative;
+	font-size:20px;
+	
 }
 .hmenu {
 	height:40px;
 	display:block;
-	font-size:20px;
 	font-weight:light;
 	font-family:'Arvo';
 	width:640px;
@@ -143,6 +145,13 @@ nav.hmenu li {
 	
 	margin-left:auto;
 	margin-right:auto;
+}
+#shadowButton{
+	font-family:'Arvo';
+	position:absolute;
+	right:10px;
+	top:12px;
+	opacity:0.5;
 }
 .hmenu.small{
 	width:480px;
@@ -253,6 +262,10 @@ input[type="radio"]:checked + img{
 	position:absolute;
 	bottom:0;
 }
+#title a{
+	text-decoration:none;
+	color:white;
+}
 #title span{
 	font-size:80px;
 	color:white;
@@ -304,14 +317,22 @@ article[class^="index"] div, article[class^="admin"] div{
 	background:grey;
 }
 
+article[class^="index"] div a[rel^="shadowbox"]{
+	display:none;
+}
+
 article[class^="index"] img, article[class^="admin"] img{	
 	min-width:200px;
 	min-height:134px;
 }
-
+article[class^="show"]{
+	width: 960px;
+}
 article[class^="show"] img{	
 	width:800px;
-
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 article[class^="index"] header a, article[class^="admin"] header a{
