@@ -114,7 +114,7 @@ a:hover{
 	clear:both;
 	width:940px;
 	margin:0 auto;
-	padding:60px 0 0 0;
+	padding:40px 0 0 0;
 }
 
 nav.hmenu {
@@ -435,9 +435,7 @@ header.main a.alert {
   color: red;
 	text-decoration:underline;
 }
-.container.project, .container.pictures{
-	padding:20px 0 0 0;
-}
+
 .container.project h2{
 	margin-bottom:20px;
 }
