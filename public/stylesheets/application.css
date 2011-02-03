@@ -111,10 +111,10 @@ a:hover{
 }
 
 .container{
+	clear:both;
 	width:940px;
 	margin:0 auto;
 	padding:60px 0 0 0;
-
 }
 
 nav.hmenu {
@@ -253,14 +253,14 @@ p.alert {
 	font-family:'Arvo';
 	float:left;
 	width:450px;
-	height:300px;
+	height:200px;
 	
 }
 
 .signupDiv{
 	width:450px;
 	float:right;
-	height:300px;
+	height:200px;
 	text-align:center;
 }
 .signupDiv a{
@@ -337,7 +337,7 @@ input[type="radio"]:checked + img{
 	left:58px;
 }
 header.main{
-	height:150px;
+	height:170px;
 	margin:0;
 	position:relative;
 	color:#333;
