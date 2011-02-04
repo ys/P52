@@ -190,3 +190,4 @@ DEPENDENCIES
   rails (= 3.0.3)
   rest-client
   sqlite3-ruby
+  will_paginate

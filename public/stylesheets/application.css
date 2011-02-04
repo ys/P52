@@ -306,7 +306,21 @@ input[type="radio"]:checked + img{
 	margin:-3px;
 }
 
-
+input[type="radio"]:checked + span{
+	border-bottom: solid 3px rgba(0,0,0,1);
+	
+	
+}
+input[type="radio"] + span{
+	opacity:1;
+	margin:5px;
+	margin-right:9px;
+	
+}
+input[type="radio"] + span:hover{
+	text-decoration:underline;
+	opacity:1;
+}
 
 #title{
 	position:relative;
@@ -333,7 +347,7 @@ input[type="radio"]:checked + img{
 	color:white;
 	position:absolute;
 	font-family:'Arvo';
-	bottom:35px;
+	top:75px;
 	left:58px;
 }
 header.main{

@@ -75,11 +75,11 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if !current_user.can_have_project? @project.size
-        format.html { redirect_to(user_projects_url(current_user), :notice => 'YOU ALREADY HAVE THAT KIND OF PROJECT') }
+        format.html { redirect_to(user_projects_url(current_user), :alert => 'YOU ALREADY HAVE THAT KIND OF PROJECT') }
         format.xml  { head :forbidden}
       else
         if @project.save
-          format.html { redirect_to([@project.user, @project], :notice => 'Project was successfully created.') }
+          format.html { redirect_to([@project.user, @project], :alert => 'Project was successfully created.') }
           format.xml  { render :xml => @project, :status => :created, :location => @project }
         else
           format.html { render :action => "new" }

@@ -22,6 +22,7 @@ gem 'multi_json'
 gem 'oa-more', :git => 'https://github.com/pchilton/omniauth.git'
 gem 'flickraw'
 gem 'avatar'
+gem 'will_paginate'
 # uncomment the next line if you wish to deploy to Heroku
  gem 'heroku'
 # uncomment the following lines if you wish to use Haml

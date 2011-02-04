@@ -12,12 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :size %><br />
-    <%= f.select(:size, validProjectSizes, {:prompt => 'Select Project Size'} )%>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
+	    <%= f.label :size %><br />
+		<% validProjectSizes.each() do |size|%>
+	    <label><%= radio_button_tag 'project[size]', size %> <span><%=size%></span></label>
+	    <%end%>
   </div>
   <div class="field">
     <%= f.label :title %><br />
