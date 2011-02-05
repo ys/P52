@@ -111,10 +111,13 @@ a:hover{
 }
 
 .container{
+	overflow:hidden;
 	clear:both;
+	height:auto !important;
 	width:940px;
 	margin:0 auto;
-	padding:40px 0 0 0;
+	margin-top:40px;
+	margin-bottom:30px;
 }
 
 nav.hmenu {
@@ -264,11 +267,13 @@ p.alert {
 	text-align:center;
 }
 .signupDiv a{
-	margin-top:75px;
+	margin-top:40px;
 	font-size:50px;
 	font-family:'Arvo';
 	display:block;
 }
+.functions{
+padding:20px;}
 
 .functions ul{
 	margin-top:40px;
@@ -318,8 +323,7 @@ input[type="radio"] + span{
 	
 }
 input[type="radio"] + span:hover{
-	text-decoration:underline;
-	opacity:1;
+	border-bottom: solid 3px rgba(0,0,0,0.6);
 }
 
 #title{
@@ -401,7 +405,7 @@ article[class^="index"] img, article[class^="admin"] img{
 	min-height:134px;
 }
 article[class^="show"]{
-	width: 960px;
+	width: 940px;
 }
 article[class^="show"] img{	
 	width:800px;
@@ -496,7 +500,7 @@ footer{
 	margin-right:auto;
 	font-family:'Arvo';
 	border-top:1px solid #67605c;
-	margin-top:30px;
+	margin-top:40px;
 	padding-top:5px;
 	margin-bottom:20px;
 }
@@ -506,37 +510,110 @@ footer{
 }
 
 
-#devise_form{
-	width:500px;
-	margin-left:auto;
-	margin-right:auto;
-	font-size:20px;
-	font-family:'Arvo';
-}
-#devise_form h2{
+form h2{
 	margin-bottom:30px;
 }
 
-#devise_form label{
+form label{
 	font-size:20px;
 	font-family:'Arvo';
 }
-#devise_form input[type="text"],#devise_form input[type="password"] {
+form input[type="text"],#devise_form input[type="password"] {
 	height:25px;
 	margin:5px;
 	width:400px;
 	font-size:20px;
 }
-#devise_form form{
-	margin-bottom:25px;
-	margin-top:25px;
+form .field label{
+	margin-top:10px;
+	margin-bottom:20px;	
 }
 
-input[type="submit"]{
-	margin:10px;
+form label, form a, form span{
+	font-family: 'Arvo';
+}
+
+form{
+	margin-bottom:25px;
+	margin-top:25px;
+	width:400px;
+	margin-left:auto;
+	margin-right:auto;
+	font-size:20px;
+	font-family:'Arvo';
+}
+form h3{
+	margin-top:20px;
+	margin-bottom:20px;
+	padding:10px;
+	background:whiteSmoke;
+	border-radius:10px;
+	-moz-border-radius:10xp;
+	-webkit-border-radius:10px;
+	padding:10px 10px 10px 10px ;
+	border: solid 1px #CCC;
+	border-top: solid 1px #DDD;
+	border-left: solid 1px #DDD;
+}
+
+form h3:hover{
+	
+	background:#E4DACE;
+	border: solid 1px #504436;
+	border-top: solid 1px #9F9782;
+	border-left: solid 1px #9F9782;
+}
+
+form .field{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+#accordion .field{
+	margin-left:20px;
+}
+input[type="submit"], input[type="button"], input[type="file"]{
+	cursor:pointer;
+//	margin:10px;
 	font-family:'Arvo';
 	font-size:20px;
-	background:#67605c;
+	background:whiteSmoke;
 	border:none;
-	padding:10px 20px 10px 20px ;
+	border-radius:10px;
+	-moz-border-radius:10xp;
+	-webkit-border-radius:10px;
+	padding:10px 10px 10px 10px ;
+	border: solid 1px #CCC;
+	border-top: solid 1px #DDD;
+	border-left: solid 1px #DDD;
+}
+select{
+	margin:10px;
+		font-family:'Arvo';
+		font-size:20px;
+		background:whiteSmoke;
+		border:none;
+		border-radius:10px;
+		-moz-border-radius:10xp;
+		-webkit-border-radius:10px;
+		padding:10px 10px 10px 10px ;
+		border: solid 1px #CCC;
+		border-top: solid 1px #DDD;
+		border-left: solid 1px #DDD;	
+}
+option{
+	font-family:'Arvo';
+	font-size:20px;
+	background:whiteSmoke;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover, input[type="file"]:hover{
+	
+	background:#E4DACE;
+	border: solid 1px #504436;
+	border-top: solid 1px #9F9782;
+	border-left: solid 1px #9F9782;
+}
+
+input[type="file"]{
+	width:240px;
 }

@@ -12,14 +12,13 @@
   <% end %>
 
   <div class="field">
-	    <%= f.label :size %><br />
+	    <%= f.label :size , 'Size : '%>
 		<% validProjectSizes.each() do |size|%>
 	    <label><%= radio_button_tag 'project[size]', size %> <span><%=size%></span></label>
 	    <%end%>
   </div>
   <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :placeholder => 'Title' %>
   </div>
   <div class="actions">
     <%= f.submit %>

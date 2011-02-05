@@ -2,6 +2,6 @@
 <% @pictures.each do |picture| %>
 	<article class="index_picture">
 	<div><%=link_to image_tag(picture.url_m) , picture.url_b , :rel=>'shadowbox[cat]'%><%=link_to image_tag(picture.url_m) , picture %></div>
-	<header><%= link_to picture.flickr["title"], picture%> by <%= link_to picture.user.name, picture.user%></header>
+	<header><%= link_to picture.name, picture%> by <%= link_to picture.user.name, picture.user%></header>
 	</article>
 <% end %>

@@ -36,7 +36,17 @@
 			$(this).parent().hide();
 			return false;
 		});
+		$("#accordion").accordion({ active: 1 });
 		$('.hmenu li:not(:last)').after('<li>•</li>');
+		
+		<%if current_page?(root_url)%>
+			$('.container:not(.main)').hide();
+			$('#take_a_look').click(function(){
+				
+				$('.container.main').fadeOut(function(){$('.container:not(.main)').fadeIn();});
+				return false;
+			});
+		<%end%>
 	});
   </script>
 </head>

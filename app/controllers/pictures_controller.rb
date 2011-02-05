@@ -1,26 +1,27 @@
 class PicturesController < ApplicationController
   before_filter :authenticate_user! ,:except =>[:show, :index, :globalIndex]
-  before_filter :must_be_auth_with_flickr! , :only => [:new,:archive,:edit,:create, :update, :destroy, :admin]
+  #before_filter :must_be_auth_with_flickr! , :only => [:new,:archive,:edit,:create, :update, :destroy, :admin]
   before_filter :preload_user, :only =>[:show,:index]
   before_filter :current_user_load, :only =>[:new,:edit,:create, :update, :destroy, :admin]
-  
+
   before_filter :must_have_active_project! , :only=>[:new,:create,:update,:edit, :destroy]
 
   before_filter :preload_picture!, :except=>[:globalIndex, :new,:index,:create, :admin]
   before_filter :load_flickraw, :only=>[:create, :new, :edit, :update]
-  before_filter :preload_new_edit, :only=>[:new]
+  before_filter :preload_new_edit, :only=>[:new, :create]
   before_filter :charge_image_from_params , :only => [:create]
-  before_filter :verify_image! , :only=>[:create]
-
+  #before_filter :verify_image! , :only=>[:create]
+  require "kconv"
   def preload_new_edit
-    
-    #@pictures = flickr.photos.search(:user_id => 'me')
-    @project = Project.find(:first, :conditions => {:title =>params[:project_id], :user_id =>@user.id})if (params[:project_id])
-    @projects = Project.find(:conditions => {:user_id => @user.id})
-    back_to = 32
-    back_to = (365/@project.size)+1 if @project
-    
-    @pictures = flickr.photos.search(:user_id => 'me', :min_upload_date => (Time.now-back_to.day).to_i , :max_upload_date => Time.now.to_i )
+
+      #@pictures = flickr.photos.search(:user_id => 'me')
+      @project = Project.find(:first, :conditions => {:title =>params[:project_id], :user_id =>@user.id}) if (params[:project_id])
+      @projects = Project.find(:conditions => {:user_id => @user.id})
+      back_to = 32
+      back_to = (365/@project.size)+1 if @project
+
+      @pictures = flickr.photos.search(:user_id => 'me', :min_upload_date => (Time.now-back_to.day).to_i , :max_upload_date => Time.now.to_i ) if @auth1
+
   end
 
   def preload_picture!
@@ -33,10 +34,11 @@ class PicturesController < ApplicationController
   def load_flickraw
     FlickRaw.api_key='52c9226e6d1e5c2452366c0f26e5ee11'
     FlickRaw.shared_secret='7248d7d35fd2b1d5'
-    auth = @user.authentications.find(:first, :conditions => { :provider => 'flickr' })
-    @auth1 = flickr.auth.checkToken :auth_token => auth['token']
+    @auth = @user.authentications.find(:first, :conditions => { :provider => 'flickr' })
+
+    @auth1 = flickr.auth.checkToken(:auth_token => @auth['token']) if @auth
   end
-  
+
   def must_have_active_project!
     projects = Project.where(:user_id => current_user.id, :closed => false, :current => true).all
     if projects.empty?
@@ -46,11 +48,11 @@ class PicturesController < ApplicationController
       #true
     end
   end
-  
+
   def charge_image_from_params
     @picture = Picture.new(params[:picture])
   end
-  
+
   def verify_image!
     if !@picture.project.can_post_picture?
       format.html { redirect_to([current_user,@picture.project], :notice => 'THIS PROJECT DOES NOT ACCEPT ANY NEW PICTURES') }
@@ -59,7 +61,7 @@ class PicturesController < ApplicationController
       format.html { redirect_to([current_user,@picture.project], :notice => 'YOU ALREADY POSTED ONE PICTURE FOR THIS PROJECT DURING THE CURRENT PERIOD') }
       format.xml  { head :forbidden}
     end
-    
+
   end
 
   def globalIndex
@@ -90,7 +92,6 @@ class PicturesController < ApplicationController
   # GET /pictures/new.xml
   def new
     @picture = Picture.new
-    
     @picture.project = @project
     respond_to do |format|
       format.html # new.html.erb
@@ -106,7 +107,7 @@ class PicturesController < ApplicationController
   # POST /pictures
   # POST /pictures.xml
   def create
-    
+
     @picture.postDate = Time.now
     if (@picture.flickr)
       hash = Hash.try_convert flickr.photos.getInfo(:photo_id => @picture.flickr)
@@ -117,22 +118,21 @@ class PicturesController < ApplicationController
       end
       @picture.flickr = hash
     end
-
-    respond_to do |format|  
-        if @picture.save
-          if (@picture.project.pictures.size == @picture.project.size)
-            p = @picture.project
-            p.closed=true
-            p.current = false
-            p.save
-          end
-          format.html { redirect_to([@picture.user,@picture], :notice => 'Picture was successfully created.') }
-          format.xml  { render :xml => @picture, :status => :created, :location => @picture }
-        else
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @picture.errors, :status => :unprocessable_entity }
+    respond_to do |format|
+      if @picture.save
+        if (@picture.project.pictures.size == @picture.project.size)
+          p = @picture.project
+          p.closed=true
+          p.current = false
+          p.save
         end
-      
+        format.html { redirect_to([@picture.user,@picture], :notice => 'Picture was successfully created.') }
+        format.xml  { render :xml => @picture, :status => :created, :location => @picture }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @picture.errors, :status => :unprocessable_entity }
+      end
+
     end
   end
 
@@ -168,13 +168,13 @@ class PicturesController < ApplicationController
     @picture.destroy
 
     respond_to do |format|
-      format.html { redirect_to(pictures_url) }
+      format.html { redirect_to(admin_pictures_url) }
       format.xml  { head :ok }
     end
   end
-  
-  
+
+
   def admin
-     @pictures = @user.pictures 
+    @pictures = @user.pictures
   end
 end
