@@ -8,11 +8,11 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: p52_development
+  database: growing-window-361
 
 test:
   <<: *defaults
-  database: p52_test
+  database: growing-window-361
 
 # set these environment variables on your prod server
 production:

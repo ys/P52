@@ -273,7 +273,8 @@ p.alert {
 	display:block;
 }
 .functions{
-padding:20px;}
+	padding:20px;
+}
 
 .functions ul{
 	margin-top:40px;
@@ -568,8 +569,23 @@ form .field{
 	margin-top:20px;
 	margin-bottom:20px;
 }
+
 #accordion .field{
 	margin-left:20px;
+}
+
+form .field.flickr{
+	margin:0;
+	width:340px;
+	margin-left:auto;
+	margin-right:auto;
+}
+form .field.flickr label{
+	margin:5px;
+	height:75px;
+	width:75px;
+	float:left;
+	display:block;
 }
 input[type="submit"], input[type="button"], input[type="file"]{
 	cursor:pointer;
