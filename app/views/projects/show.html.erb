@@ -9,7 +9,7 @@
   <%= @project.numberOfPictures %> / <%= @project.size %> - By <%=link_to @project.user.name, @project.user%>
 
   <span class="archive_project"><% if @project.closed %> ARCHIVED<%end%></span></h2>
-<% if !@project.description.empty? %><%= @project.description %> <%end%>
+<% if !@project.description.blank? %><%= @project.description %> <%end%>
 </header>
 </div>
 <div style="clear:both"></div>
