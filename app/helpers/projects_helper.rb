@@ -13,4 +13,17 @@ module ProjectsHelper
     return false
   end
   
+  def new_picture_needed_for_period size
+    case size
+    when 12
+      'month'
+    when 52
+      'week'
+    when 365
+      'two days'
+    else false
+    end
+ 
+  end
+  
 end
