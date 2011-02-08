@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
+  def per_page
+    12
+  end
   def preload_user
     @user = if (params[:user_id])
       User.find(:first,:conditions =>{:name=>params[:user_id]})

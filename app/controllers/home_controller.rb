@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
   def index
-    @users = User.asc(:name).all
-    @projects = Project.asc(:title).all
-    @pictures = Picture.desc(:postDate).paginate :page => params[:page]
+    @users = User.desc(:last_sign_in_at).limit(20)
+    @projects = Project.desc(:updated_at).limit(20)
+    @pictures = Picture.desc(:postDate).paginate :page => params[:page], :per_page => per_page
   end
   def random
     redirect_to pick()

@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   before_filter :current_user_load, :only =>[:archive,:edit,:create, :update, :destroy, :admin]
   before_filter :preload_project, :only => [:archive,:show, :edit, :update, :destroy, :feed]
   before_filter :user_owns_project! ,:only => [:edit, :update, :destroy]
-
+  before_filter :preload_projects , :only => [:index, :admin]
   def user_owns_project!
     if authenticate_user!
       unless current_user == @project.user
@@ -21,16 +21,18 @@ class ProjectsController < ApplicationController
     @project = Project.asc(:title).where(:user_id => @user.id, :title =>project_title).first
   end
 
-
+  def preload_projects
+    @projects = Project.desc(:updated_at).where(:user_id => @user.id).paginate :page => params[:page], :per_page => per_page
+  end
   def globalIndex
-    @projects = Project.asc(:title).all
+    @projects = Project.desc(:updated_at).paginate :page => params[:page], :per_page => per_page
     render "index"
   end
 
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.asc(:title).where(:user_id => @user.id)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @projects }
@@ -40,7 +42,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.xml
   def show
-    puts @project
+    @pictures = Picture.where(:project_id => @project.id).paginate :page => params[:page], :per_page => per_page
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @project }
@@ -130,7 +132,6 @@ class ProjectsController < ApplicationController
   end
   
   def admin 
-    @projects = Project.asc(:title).where(:user_id => @user.id)
   end
   
   def feed

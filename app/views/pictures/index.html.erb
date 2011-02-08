@@ -5,3 +5,4 @@
 	<header><%= link_to picture.name, picture%> by <%= link_to picture.user.name, picture.user%></header>
 	</article>
 <% end %>
+<%= will_paginate @pictures %>

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   
  
   def index
-    @users = User.asc(:name).all
+    @users = User.desc(:last_sign_in_at).paginate :page => params[:page], :per_page => per_page
   end
   
   def show

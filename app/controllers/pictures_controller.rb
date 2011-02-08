@@ -10,7 +10,8 @@ class PicturesController < ApplicationController
   before_filter :load_flickraw, :only=>[:create, :new, :edit, :update]
   before_filter :preload_new_edit, :only=>[:new, :create]
   before_filter :charge_image_from_params , :only => [:create]
-  before_filter :verify_image! , :only=>[:create]
+  #before_filter :verify_image! , :only=>[:create]
+  before_filter :preload_pictures, :only=>[:index, :admin]
   require "kconv"
   def preload_new_edit
 
@@ -64,15 +65,22 @@ class PicturesController < ApplicationController
 
   end
 
+  def preload_pictures
+    projects = Project.where(:user_id => @user.id).map(&:_id)
+    @pictures = Picture.desc(:postDate).where(:project_id.in => projects).desc(:postDate).paginate :page => params[:page], :per_page => per_page
+    
+  end
+
   def globalIndex
-    @pictures = Picture.desc(:postDate)
+
+    @pictures = Picture.desc(:postDate).paginate :page => params[:page], :per_page => per_page 
     render :index
   end
 
   # GET /pictures
   # GET /pictures.xml
   def index
-    @pictures = @user.pictures
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @pictures }
@@ -175,6 +183,5 @@ class PicturesController < ApplicationController
 
 
   def admin
-    @pictures = @user.pictures
   end
 end

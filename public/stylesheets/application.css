@@ -455,10 +455,10 @@ header.main a.alert {
 	text-decoration:underline;
 }
 
-.container.project h2{
+.container.project h2, .container.main h2{
 	margin-bottom:20px;
 }
-.container.project a {
+.container.project a, .container.main a img{
 	font-size:15px;
 	color:#333;
 	opacity:0.5;
@@ -468,7 +468,7 @@ header.main a.alert {
 	transition-duration: 0.5s;
 }
 
-.container.project a:hover {
+.container.project a:hover , .container.main a:hover img{
 	opacity:1;
 	
 }
@@ -633,3 +633,31 @@ input[type="submit"]:hover, input[type="button"]:hover, input[type="file"]:hover
 input[type="file"]{
 	width:240px;
 }
+
+.pagination {
+  text-align: center;
+  padding: .3em; }
+  .pagination a, .pagination span {
+    padding: .2em .5em; }
+  .pagination span.disabled {
+    color: #AAA; }
+  .pagination span.current {
+    font-weight: bold;
+    color: #FF0084; }
+  .pagination a {
+    border: 1px solid #DDDDDD;
+    color: #67605c;
+    text-decoration: none; }
+    .pagination a:hover, .pagination a:focus {
+      border-color: black;
+      background: #67605c;
+      color: white; }
+  .pagination .page_info {
+    color: #aaa;
+    padding-top: .8em; }
+  .pagination .prev_page, .pagination .next_page {
+    border-width: 2px; }
+  .pagination .prev_page {
+    margin-right: 1em; }
+  .pagination .next_page {
+    margin-left: 1em; }

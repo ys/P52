@@ -1,4 +1,4 @@
-<% if !user_signed_in?%>
+<% if !user_signed_in? && !params[:page]%>
 	<div class="functions">
 		You want to post :
 		<ul>
@@ -12,24 +12,26 @@
 		<a id='take_a_look' href='#'>Or Take a look</a>
 	</div>
 </div>
-<div class="container pictures">
+<div class="container project">
 <%end%>
+<h2>Last Pictures</h2>
 <% @pictures.each do |picture| %>
 	<article class="index_home">
   		<div><%= link_to (image_tag picture.url_m), picture.url_b, :rel =>'shadowbox[img]' %><%= link_to (image_tag picture.url_m), picture%></div>
 		<header>by <%=picture.user.name%></header>
 	</article>
 <% end %>
+<%= will_paginate @pictures %>
 </div>
 <div class="container project">
-<h2>Users: </h2>
+<h2>Last Active Users: </h2>
 
 <% @users.each do |user| %>
   <%= link_to user.name, user %>  
 <% end %>
 </div>
 <div class="container project">
-<h2>Projects</h2>
+<h2>Last Updated Projects</h2>
 
 <% @projects.each do |project| %>
   <%= link_to project.title, user_project_path(project.user,project) %>  
