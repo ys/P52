@@ -22,9 +22,9 @@
 	<h3><a href="#">Flickr:</a></h3>
 <div class="field <%if @auth%>flickr<%end%>">
 	<%if @auth%>
-	<% @pictures.empty?%>
-		<%= link_to('Sorry, you didn\'t uploaded a picture to flickr during last period (month, week, two days)', authentications_path, :class=> 'alert') %>
-	<%end%>
+		<% if @pictures.empty?%>
+			<%= link_to('Sorry, you didn\'t uploaded a picture to flickr during last period (month, week, two days)', authentications_path, :class=> 'alert') %>
+		<%end%>
   	
 	<% @pictures.each do |pic| %>
 		<label>
