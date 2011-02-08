@@ -10,7 +10,7 @@ class PicturesController < ApplicationController
   before_filter :load_flickraw, :only=>[:create, :new, :edit, :update]
   before_filter :preload_new_edit, :only=>[:new, :create]
   before_filter :charge_image_from_params , :only => [:create]
-  #before_filter :verify_image! , :only=>[:create]
+  before_filter :verify_image! , :only=>[:create]
   before_filter :preload_pictures, :only=>[:index, :admin]
   require "kconv"
   def preload_new_edit
