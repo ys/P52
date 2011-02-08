@@ -39,7 +39,7 @@
 		$("#accordion").accordion({ active: 1 });
 		$('.hmenu li:not(:last)').after('<li>•</li>');
 		
-		<%if current_page?(root_url) && !params[:page]%>
+		<%if current_page?(root_url) && !user_signed_in? && !params[:page] %>
 			$('.container:not(.main)').hide();
 			$('#take_a_look').click(function(){
 				
