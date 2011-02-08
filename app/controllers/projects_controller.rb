@@ -25,6 +25,7 @@ class ProjectsController < ApplicationController
     @projects = Project.desc(:updated_at).where(:user_id => @user.id).paginate :page => params[:page], :per_page => per_page
   end
   def globalIndex
+    add_crumb 'Projects', projects_path
     @projects = Project.desc(:updated_at).paginate :page => params[:page], :per_page => per_page
     render "index"
   end
@@ -32,7 +33,9 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    
+    add_crumb 'Users', users_path
+    add_crumb @user.name, user_path(@user)
+    add_crumb 'Projects', user_projects_path(@user)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @projects }
@@ -42,6 +45,10 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.xml
   def show
+    add_crumb 'Users', users_path
+    add_crumb @user.name, user_path(@user)
+    add_crumb 'Projects', user_projects_path(@user)
+    add_crumb @project.title, user_project_path(@user,@project)
     @pictures = Picture.where(:project_id => @project.id).paginate :page => params[:page], :per_page => per_page
     respond_to do |format|
       format.html # show.html.erb

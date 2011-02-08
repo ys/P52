@@ -457,6 +457,7 @@ header.main a.alert {
 
 .container.project h2, .container.main h2{
 	margin-bottom:20px;
+	font-size:18px;
 }
 .container.project a, .container.main a img{
 	font-size:15px;
@@ -486,7 +487,7 @@ header[class^="show"] h2{
 	margin-bottom:15px;
 }
 header[class^="show"]{
-	font-size:20px;
+	font-size:14px;
 	margin-bottom:20px;
 }
 header[class^="show_picture"]{

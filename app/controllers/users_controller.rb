@@ -13,11 +13,13 @@ class UsersController < ApplicationController
   
  
   def index
+    add_crumb 'Users', users_path
     @users = User.desc(:last_sign_in_at).paginate :page => params[:page], :per_page => per_page
   end
   
   def show
-    
+    add_crumb 'Users', users_path
+    add_crumb @user.name, user_path(@user)
   end
   
   def recent_tweets

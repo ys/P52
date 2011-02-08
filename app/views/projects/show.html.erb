@@ -3,13 +3,13 @@
 <% end %>
 
 <header class="show_project_header">
-  <h2><%= @project.title %> - 
+  <h2><%= render_crumbs %></h2>
   
 
-  <%= @project.numberOfPictures %> / <%= @project.size %> - By <%=link_to @project.user.name, @project.user%>
+  
 
-  <span class="archive_project"><% if @project.closed %> ARCHIVED<%end%></span></h2>
-<% if !@project.description.blank? %><%= @project.description %> <%end%>
+  <span class="archive_project"><%= @project.numberOfPictures %> / <%= @project.size %>  <% if @project.closed %> ARCHIVED<%end%>
+<% if !@project.description.blank? %><%= @project.description %> <%end%></span>
 </header>
 </div>
 <div style="clear:both"></div>

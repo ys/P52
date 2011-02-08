@@ -1,4 +1,4 @@
-
+<header class="show_projects_header"><h2><%= render_crumbs %></h2></header>
 <% @pictures.each do |picture| %>
 	<article class="index_picture">
 	<div><%=link_to image_tag(picture.url_m) , picture.url_b , :rel=>'shadowbox[cat]'%><%=link_to image_tag(picture.url_m) , picture %></div>

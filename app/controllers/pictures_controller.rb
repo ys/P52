@@ -72,7 +72,7 @@ class PicturesController < ApplicationController
   end
 
   def globalIndex
-
+    add_crumb 'Pictures', pictures_path
     @pictures = Picture.desc(:postDate).paginate :page => params[:page], :per_page => per_page 
     render :index
   end
@@ -80,7 +80,9 @@ class PicturesController < ApplicationController
   # GET /pictures
   # GET /pictures.xml
   def index
-    
+    add_crumb 'Users', users_path
+    add_crumb @user.name, user_path(@user)
+    add_crumb 'Pictures', user_pictures_path(@user)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @pictures }
@@ -90,6 +92,12 @@ class PicturesController < ApplicationController
   # GET /pictures/1
   # GET /pictures/1.xml
   def show
+    add_crumb('Users', users_path) if @user
+    add_crumb(@user.name, user_path(@user)) if @user
+    add_crumb('Pictures', user_pictures_path(@user)) if @user
+    add_crumb 'Pictures', pictures_path unless @user
+    add_crumb(@picture.name, user_picture_path(@user, @picture)) if @user
+    add_crumb(@picture.name, picture_path(@picture)) unless @user
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @picture }

@@ -84,6 +84,7 @@ GEM
     builder (2.1.2)
     cancan (1.5.1)
     configuration (1.2.0)
+    crummy (1.1.0)
     devise (1.1.5)
       bcrypt-ruby (~> 2.1.2)
       warden (~> 1.0.2)
@@ -180,6 +181,7 @@ DEPENDENCIES
   avatar
   bson_ext
   cancan
+  crummy (>= 1.0.1)
   devise
   flickraw
   gstore

@@ -1,9 +1,10 @@
+<header class="show_projects_header"><h2><%= render_crumbs %></h2></header>
 <article class="show_picture">
 	
 <%=image_tag @picture.url_b%><br/>
-<header class="show_picture_header">
+<!--<header class="show_picture_header">
   <%= @picture.name if (@picture.name && !@picture.name.empty?)%> <%= 'This picture is' if (!@picture.name || @picture.name.empty?)%> in <%= link_to @picture.project.title, [@picture.user,@picture.project] %>
 By <%= @picture.user.name%>
-</header>
+</header>-->
   </article>
 

@@ -1,4 +1,4 @@
-
+<header class="show_projects_header"><h2><%= render_crumbs %></h2></header>
 <% @projects.each do |project| %>
 	<article class="index_project">
   	<div><%= link_to image_tag(project.url_m), [project.user,project] %></div>
