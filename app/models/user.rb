@@ -41,7 +41,7 @@ class User
     if picture
       picture.url_m
     else
-     'blank.gif'
+     'picture404.png'
     end
   end
   
@@ -72,7 +72,7 @@ class User
     elsif avatar.url
       avatar.url(:square)
     else
-      'blank.gif'
+      'picture404.png'
     end
   end
   

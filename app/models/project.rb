@@ -41,7 +41,7 @@ class Project
     if picture
       picture.url_s
     else
-     'blank.gif'
+     'picture404.png'
     end
   end
   def url_m
@@ -49,7 +49,7 @@ class Project
     if picture
       picture.url_m
     else
-     'blank.gif'
+     'picture404.png'
     end
   end
 
