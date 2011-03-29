@@ -459,7 +459,7 @@ header.main a.alert {
 	margin-bottom:20px;
 	font-size:18px;
 }
-.container.project a, .container.main a img{
+.container.project a, .container.main a img, .container.pictures a img{
 	font-size:15px;
 	color:#333;
 	opacity:0.5;
@@ -469,7 +469,7 @@ header.main a.alert {
 	transition-duration: 0.5s;
 }
 
-.container.project a:hover , .container.main a:hover img{
+.container.project a:hover , .container.main a:hover img, .container.pictures a:hover img{
 	opacity:1;
 	
 }
