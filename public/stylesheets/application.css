@@ -397,9 +397,9 @@ article[class^="index"] div, article[class^="admin"] div{
 	background:grey;
 }
 
-article[class^="index"] div a[rel^="shadowbox"]{
+/**article[class^="index"] div a[rel^="shadowbox"]{
 	display:none;
-}
+}**/
 
 article[class^="index"] img, article[class^="admin"] img{	
 	min-width:200px;
